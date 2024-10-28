@@ -3,6 +3,7 @@ package models;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 public class Pokemon {
     // TODO añadir más atributos como imagen, gif estadísticas...
@@ -28,16 +29,16 @@ public class Pokemon {
 
     @Override
     public String toString() {
-        return "Pokemon{" +
-                "id = " + id +
-                ", name = '" + name + '\'' +
-                ", baseExperience = " + baseExperience +
-                ", height = " + height +
-                ", weight = " + weight +
-                ", abilities = " + abilities +
-                ", forms = " + forms +
-                ", sprites = " + sprites +
-                '}';
+        StringJoiner joiner = new StringJoiner(", ", "Pokemon{", "}");
+
+        if (id > 0) joiner.add("id=" + id);
+        if (name != null) joiner.add("name='" + name + "'");
+        if (baseExperience > 0) joiner.add("baseExperience=" + baseExperience);
+        if (height > 0) joiner.add("height=" + height);
+        if (weight > 0) joiner.add("weight=" + weight);
+        if (sprites != null && sprites.getFrontDefault() != null) joiner.add("sprite='" + sprites.getFrontDefault() + "'");
+
+        return joiner.toString();
     }
 
     public int getId() {
