@@ -9,13 +9,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import models.Pokemon;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class PokemonGUIController implements Initializable {
@@ -38,6 +39,9 @@ public class PokemonGUIController implements Initializable {
     @FXML
     private Label nameLabel;
 
+    @FXML
+    private Pane gifPanel;
+
     private Stage stage;
 
     public void setStage(Stage stage) {
@@ -51,7 +55,12 @@ public class PokemonGUIController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         pokemonListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                updatePokemonInfo(newValue);
+                try {
+                    Pokemon pokemon = PokemonApiClient.getPokemon(newValue.getName());
+                    updatePokemonInfo(pokemon);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -101,6 +110,8 @@ public class PokemonGUIController implements Initializable {
     }
 
     private void updatePokemonInfo(Pokemon pokemon) {
+        System.out.println("UPDATE POKEMON");
+        System.out.println(pokemon);
         // Actualizar la interfaz de usuario con la información del Pokémon
         idLabel.setText(String.valueOf(pokemon.getId()));
         nameLabel.setText(pokemon.getName());
@@ -113,6 +124,8 @@ public class PokemonGUIController implements Initializable {
         // Cargar la imagen del Pokémon en el ImageView correspondiente
         // Esto requeriría cargar la imagen desde la URL proporcionada por la API
         // imageView.setImage(new Image(pokemon.getImageUrl()));
+        gifPanel.getChildren().clear();
+        gifPanel.getChildren().add(new ImageView(pokemon.getSprites().getFrontDefault()));
 
         // Cargar el GIF del Pokémon en el WebView correspondiente
         // Esto requeriría cargar el GIF desde la URL proporcionada por la API

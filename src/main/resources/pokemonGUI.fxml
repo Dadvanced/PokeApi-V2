@@ -31,4 +31,7 @@
     <bottom>
 
     </bottom>
+   <right>
+      <Pane id="pokemonGif" fx:id="gifPanel" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>

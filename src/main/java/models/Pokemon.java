@@ -1,15 +1,22 @@
 package models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Pokemon {
+    // TODO añadir más atributos como imagen, gif estadísticas...
+
     private int id;
     private String name;
-    private int baseExperience;
     private int height;
     private int weight;
     private List<Ability> abilities;
     private List<Form> forms;
+    private Sprites sprites;
+
+    @SerializedName("base_experience")
+    private int baseExperience;
 
     public Pokemon() {
     }
@@ -29,6 +36,7 @@ public class Pokemon {
                 ", weight = " + weight +
                 ", abilities = " + abilities +
                 ", forms = " + forms +
+                ", sprites = " + sprites +
                 '}';
     }
 
@@ -86,5 +94,13 @@ public class Pokemon {
 
     public void setForms(List<Form> forms) {
         this.forms = forms;
+    }
+
+    public void setSprites(Sprites sprites) {
+        this.sprites = sprites;
+    }
+
+    public Sprites getSprites() {
+        return this.sprites;
     }
 }
