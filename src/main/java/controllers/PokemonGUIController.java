@@ -9,10 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import models.Pokemon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class PokemonGUIController implements Initializable {
+    private static final Logger logger = LoggerFactory.getLogger(PokemonApiClient.class);
 
     @FXML
     private Button searchButton;
@@ -40,7 +44,7 @@ public class PokemonGUIController implements Initializable {
     private Label nameLabel;
 
     @FXML
-    private Pane gifPanel;
+    private ImageView pkmImageField;
 
     private Stage stage;
 
@@ -53,6 +57,7 @@ public class PokemonGUIController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         pokemonListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 try {
@@ -64,16 +69,25 @@ public class PokemonGUIController implements Initializable {
             }
         });
 
+        searchField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                searchButton.fire();
+            }
+        });
+
+        // Search first 151 pokemons
         gen1Button.setOnAction(event -> {
             loadPokemonList(1);
             disableGenButtons(true);
         });
 
+        // Search 151 pokemons for second generation
         gen2Button.setOnAction(event -> {
             loadPokemonList(2);
             disableGenButtons(false);
         });
 
+        // Search any pokemon by name or id
         searchButton.setOnAction(actionEvent -> {
             disableGenButtons(false);
             try {
@@ -92,7 +106,7 @@ public class PokemonGUIController implements Initializable {
             pokemonListView.setItems(observableList);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getLocalizedMessage());            ;
         }
     }
 
@@ -110,26 +124,20 @@ public class PokemonGUIController implements Initializable {
     }
 
     private void updatePokemonInfo(Pokemon pokemon) {
-        System.out.println("UPDATE POKEMON");
-        System.out.println(pokemon);
-        // Actualizar la interfaz de usuario con la información del Pokémon
+        logger.info("UPDATE POKEMON");
+        logger.info(pokemon.toString());
+
+        // Update user interface with the pokemon information
         idLabel.setText(String.valueOf(pokemon.getId()));
         nameLabel.setText(pokemon.getName());
+
         // Actualizar otras etiquetas con más información del Pokémon (vida, ataque, defensa, etc.)
         // Por ejemplo:
         // healthLabel.setText("Health: " + pokemon.getHealth());
         // attackLabel.setText("Attack: " + pokemon.getAttack());
         // defenseLabel.setText("Defense: " + pokemon.getDefense());
 
-        // Cargar la imagen del Pokémon en el ImageView correspondiente
-        // Esto requeriría cargar la imagen desde la URL proporcionada por la API
-        // imageView.setImage(new Image(pokemon.getImageUrl()));
-        gifPanel.getChildren().clear();
-        gifPanel.getChildren().add(new ImageView(pokemon.getSprites().getFrontDefault()));
-
-        // Cargar el GIF del Pokémon en el WebView correspondiente
-        // Esto requeriría cargar el GIF desde la URL proporcionada por la API
-        // webView.getEngine().load(pokemon.getGifUrl());
+        pkmImageField.setImage(new Image(pokemon.getSprites().getOther().getShowdown().getFrontDefault()));
     }
 
     private void disableGenButtons(boolean disableGen1) {

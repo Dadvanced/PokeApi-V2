@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class Pokemon {
-    // TODO añadir más atributos como imagen, gif estadísticas...
-
     private int id;
     private String name;
     private int height;
@@ -15,6 +13,7 @@ public class Pokemon {
     private List<Ability> abilities;
     private List<Form> forms;
     private Sprites sprites;
+    private List<Stats> stats;
 
     @SerializedName("base_experience")
     private int baseExperience;
@@ -37,6 +36,7 @@ public class Pokemon {
         if (height > 0) joiner.add("height=" + height);
         if (weight > 0) joiner.add("weight=" + weight);
         if (sprites != null && sprites.getFrontDefault() != null) joiner.add("sprite='" + sprites.getFrontDefault() + "'");
+        if (stats != null && !stats.isEmpty()) joiner.add(stats.toString());
 
         return joiner.toString();
     }
@@ -103,5 +103,13 @@ public class Pokemon {
 
     public Sprites getSprites() {
         return this.sprites;
+    }
+
+    public List<Stats> getStats() {
+        return stats;
+    }
+
+    public void setStats(List<Stats> stats) {
+        this.stats = stats;
     }
 }

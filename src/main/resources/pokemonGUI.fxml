@@ -2,6 +2,7 @@
 
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PokemonGUIController">
@@ -11,16 +12,16 @@
 
     <top>
         <HBox alignment="CENTER" spacing="10">
-            <Button fx:id="searchButton" onAction="#searchPokemon" text="Search" />
             <Button fx:id="gen1Button" text="Gen 1" />
             <Button fx:id="gen2Button" text="Gen 2" />
             <TextField fx:id="searchField" promptText="Enter Pokemon name..." />
+            <Button fx:id="searchButton" onAction="#searchPokemon" text="Search" />
         </HBox>
     </top>
 
     <center>
         <VBox alignment="CENTER" prefHeight="548.0" prefWidth="1021.0" spacing="10">
-            <ListView fx:id="pokemonListView" styleClass="list-view" />
+            <ListView fx:id="pokemonListView" prefHeight="400.0" prefWidth="883.0" styleClass="list-view" />
             <Label styleClass="bold-label" text="Pokemon ID:" />
             <Label fx:id="idLabel" />
             <Label styleClass="bold-label" text="Pokemon Name:" />
@@ -29,9 +30,18 @@
     </center>
 
     <bottom>
-
+        <TableView fx:id="tableStats" prefHeight="200.0" prefWidth="200.0" stylesheets="@styles.css">
+            <columns>
+                <TableColumn fx:id="hp" prefWidth="75.0" text="HP" />
+                <TableColumn fx:id="attack" prefWidth="75.0" text="Attack" />
+                <TableColumn fx:id="defense" prefWidth="75.0" text="Defense" />
+                <TableColumn fx:id="specialAttack" prefWidth="125.0" text="Special Attack" />
+                <TableColumn fx:id="specialDefense" prefWidth="109.0" text="Special Defense" />
+                <TableColumn fx:id="speed" prefWidth="72.0" text="Speed" />
+            </columns>
+        </TableView>
     </bottom>
    <right>
-      <Pane id="pokemonGif" fx:id="gifPanel" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ImageView fx:id="pkmImageField" fitHeight="354.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>

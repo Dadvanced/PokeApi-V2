@@ -27,3 +27,11 @@
     -fx-text-fill: white;
     -fx-background-color: #cf4036;
 }
+
+.table-view .column-header {
+    -fx-background-color: #544644;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #cf4036;
+}
