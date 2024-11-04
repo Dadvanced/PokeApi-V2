@@ -1,9 +1,8 @@
-package models;
+package models.sprites;
 
 import com.google.gson.annotations.SerializedName;
 
-public class OfficialArtWork {
-
+public class Animated {
     @SerializedName("front_default")
     private String frontDefault;
 

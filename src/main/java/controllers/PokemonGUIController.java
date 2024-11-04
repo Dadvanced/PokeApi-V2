@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import models.Pokemon;
+import models.pokemon.Pokemon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static utilities.Utils.capitalizeFirstLetter;
 
 public class PokemonGUIController implements Initializable {
     private static final Logger logger = LoggerFactory.getLogger(PokemonApiClient.class);
@@ -42,6 +44,24 @@ public class PokemonGUIController implements Initializable {
 
     @FXML
     private Label nameLabel;
+
+    @FXML
+    private Label hpLabel;
+
+    @FXML
+    private Label attackLabel;
+
+    @FXML
+    private Label defenseLabel;
+
+    @FXML
+    private Label spAttackLabel;
+
+    @FXML
+    private Label spDefenseLabel;
+
+    @FXML
+    private Label speedLabel;
 
     @FXML
     private ImageView pkmImageField;
@@ -75,19 +95,19 @@ public class PokemonGUIController implements Initializable {
             }
         });
 
-        // Search first 151 pokemons
+        // Search first 151 pokémon
         gen1Button.setOnAction(event -> {
             loadPokemonList(1);
             disableGenButtons(true);
         });
 
-        // Search 151 pokemons for second generation
+        // Search 151 pokémon for second generation
         gen2Button.setOnAction(event -> {
             loadPokemonList(2);
             disableGenButtons(false);
         });
 
-        // Search any pokemon by name or id
+        // Search any pokémon by name or id
         searchButton.setOnAction(actionEvent -> {
             disableGenButtons(false);
             try {
@@ -106,7 +126,7 @@ public class PokemonGUIController implements Initializable {
             pokemonListView.setItems(observableList);
 
         } catch (IOException e) {
-            logger.error(e.getLocalizedMessage());            ;
+            logger.error(e.getLocalizedMessage());
         }
     }
 
@@ -124,18 +144,18 @@ public class PokemonGUIController implements Initializable {
     }
 
     private void updatePokemonInfo(Pokemon pokemon) {
-        logger.info("UPDATE POKEMON");
-        logger.info(pokemon.toString());
+        //logger.info("UPDATE POKEMON");
+        //logger.info(pokemon.toString());
 
-        // Update user interface with the pokemon information
+        // Update user interface with the pokémon information
         idLabel.setText(String.valueOf(pokemon.getId()));
-        nameLabel.setText(pokemon.getName());
-
-        // Actualizar otras etiquetas con más información del Pokémon (vida, ataque, defensa, etc.)
-        // Por ejemplo:
-        // healthLabel.setText("Health: " + pokemon.getHealth());
-        // attackLabel.setText("Attack: " + pokemon.getAttack());
-        // defenseLabel.setText("Defense: " + pokemon.getDefense());
+        nameLabel.setText(capitalizeFirstLetter(pokemon.getName()));
+        hpLabel.setText(String.valueOf(pokemon.getBaseStat("hp")));
+        attackLabel.setText(String.valueOf(pokemon.getBaseStat("attack")));
+        defenseLabel.setText(String.valueOf(pokemon.getBaseStat("defense")));
+        spAttackLabel.setText(String.valueOf(pokemon.getBaseStat("special-attack")));
+        spDefenseLabel.setText(String.valueOf(pokemon.getBaseStat("special-defense")));
+        speedLabel.setText(String.valueOf(pokemon.getBaseStat("speed")));
 
         pkmImageField.setImage(new Image(pokemon.getSprites().getOther().getShowdown().getFrontDefault()));
     }

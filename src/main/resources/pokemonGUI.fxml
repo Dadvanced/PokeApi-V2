@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -22,26 +23,64 @@
     <center>
         <VBox alignment="CENTER" prefHeight="548.0" prefWidth="1021.0" spacing="10">
             <ListView fx:id="pokemonListView" prefHeight="400.0" prefWidth="883.0" styleClass="list-view" />
-            <Label styleClass="bold-label" text="Pokemon ID:" />
-            <Label fx:id="idLabel" />
-            <Label styleClass="bold-label" text="Pokemon Name:" />
-            <Label fx:id="nameLabel" />
+         <HBox prefHeight="57.0" prefWidth="1021.0">
+            <children>
+               <VBox prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                        <Label styleClass="bold-label" text="Pokemon ID:" />
+                        <Label fx:id="idLabel" textAlignment="CENTER" />
+                  </children>
+               </VBox>
+               <VBox prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                        <Label styleClass="bold-label" text="Pokemon Name:" />
+                        <Label fx:id="nameLabel" textAlignment="CENTER" />
+                  </children>
+              </VBox>
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                          <Label styleClass="bold-label" text="Base HP:" />
+                          <Label fx:id="hpLabel" textAlignment="CENTER" />
+                    </children>
+              </VBox>
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                      <children>
+                            <Label styleClass="bold-label" text="Base Attack:" />
+                            <Label fx:id="attackLabel" textAlignment="CENTER" />
+                      </children>
+                </VBox>
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                      <children>
+                            <Label styleClass="bold-label" text="Base Defense:" />
+                            <Label fx:id="defenseLabel" textAlignment="CENTER" />
+                      </children>
+                </VBox>
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                      <children>
+                            <Label styleClass="bold-label" text="Base Sp Attack:" />
+                            <Label fx:id="spAttackLabel" textAlignment="CENTER" />
+                      </children>
+                </VBox>
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                      <children>
+                            <Label styleClass="bold-label" text="Base Sp Defense:" />
+                            <Label fx:id="spDefenseLabel" textAlignment="CENTER" />
+                      </children>
+                </VBox>
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                      <children>
+                            <Label styleClass="bold-label" text="Base Speed:" />
+                            <Label fx:id="speedLabel" textAlignment="CENTER" />
+                      </children>
+                </VBox>
+            </children>
+         </HBox>
         </VBox>
     </center>
-
-    <bottom>
-        <TableView fx:id="tableStats" prefHeight="200.0" prefWidth="200.0" stylesheets="@styles.css">
-            <columns>
-                <TableColumn fx:id="hp" prefWidth="75.0" text="HP" />
-                <TableColumn fx:id="attack" prefWidth="75.0" text="Attack" />
-                <TableColumn fx:id="defense" prefWidth="75.0" text="Defense" />
-                <TableColumn fx:id="specialAttack" prefWidth="125.0" text="Special Attack" />
-                <TableColumn fx:id="specialDefense" prefWidth="109.0" text="Special Defense" />
-                <TableColumn fx:id="speed" prefWidth="72.0" text="Speed" />
-            </columns>
-        </TableView>
-    </bottom>
    <right>
       <ImageView fx:id="pkmImageField" fitHeight="354.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </right>
+   <padding>
+      <Insets left="10.0" />
+   </padding>
 </BorderPane>

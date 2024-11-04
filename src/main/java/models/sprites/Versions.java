@@ -1,4 +1,4 @@
-package models;
+package models.sprites;
 
 import com.google.gson.annotations.SerializedName;
 

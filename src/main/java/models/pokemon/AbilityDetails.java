@@ -1,10 +1,10 @@
-package models;
+package models.pokemon;
 
-public class Form {
+public class AbilityDetails {
     private String name;
     private String url;
 
-    public Form() {
+    public AbilityDetails() {
     }
 
     public String getName() {

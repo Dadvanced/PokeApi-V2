@@ -2,7 +2,7 @@ package utilities;
 
 import com.google.gson.Gson;
 import models.PokedexResponse;
-import models.Pokemon;
+import models.pokemon.Pokemon;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,5 +32,12 @@ public class Utils {
         return pokedexResponse.getPokemonEntries().stream()
                 .map(entry -> new Pokemon(entry.getEntryNumber(), entry.getPokemonSpecies().getName()))
                 .collect(Collectors.toList());
+    }
+
+    public static String capitalizeFirstLetter(String name) {
+        if (name == null || name.isEmpty()) {
+            return name;
+        }
+        return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     }
 }

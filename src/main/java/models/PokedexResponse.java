@@ -4,7 +4,6 @@ import java.util.List;
 
 public class PokedexResponse {
     private List<PokemonEntry> pokemon_entries;
-    private List<Description> descriptions;
 
     public List<PokemonEntry> getPokemonEntries() {
         return pokemon_entries;
@@ -20,13 +19,5 @@ public class PokedexResponse {
 
     public void setPokemon_entries(List<PokemonEntry> pokemon_entries) {
         this.pokemon_entries = pokemon_entries;
-    }
-
-    public List<Description> getDescriptions() {
-        return descriptions;
-    }
-
-    public void setDescriptions(List<Description> descriptions) {
-        this.descriptions = descriptions;
     }
 }

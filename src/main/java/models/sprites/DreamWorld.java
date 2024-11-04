@@ -1,8 +1,9 @@
-package models;
+package models.sprites;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Showdown {
+public class DreamWorld {
+
     @SerializedName("front_default")
     private String frontDefault;
 

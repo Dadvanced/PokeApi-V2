@@ -1,4 +1,4 @@
-package models;
+package models.sprites;
 
 public class BlackWhite {
     private Animated animated;

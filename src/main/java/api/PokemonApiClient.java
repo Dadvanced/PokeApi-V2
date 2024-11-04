@@ -1,8 +1,7 @@
 package api;
 
-import models.Description;
 import models.PokedexResponse;
-import models.Pokemon;
+import models.pokemon.Pokemon;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -19,8 +18,6 @@ public class PokemonApiClient {
 
 
     private static final OkHttpClient client = new OkHttpClient();
-    private static String regionName = "";
-    private static String regionDescription = "";
 
     // Get Pokemon by name or id (e.g. celebi || 300)
     public static Pokemon getPokemon(String nameOrId) throws IOException {
@@ -54,7 +51,6 @@ public class PokemonApiClient {
             String responseBody = response.body().string();
 
             final PokedexResponse pokedexResponse = Utils.parseResponseBody(responseBody);
-            setRegionValues(pokedexResponse);
             pokemonList = Utils.parsePokedexResponse(pokedexResponse);
 
         } catch (IOException ioException) {
@@ -64,23 +60,4 @@ public class PokemonApiClient {
 
         return pokemonList;
     }
-
-
-    /**
-     * Set the name and description for the region in spanish
-     * @param pokedexResponse
-     */
-    private static void setRegionValues(PokedexResponse pokedexResponse) {
-        for (Description description : pokedexResponse.getDescriptions()) {
-            if ("es".equals(description.getLanguage().getName())) {
-                regionName = description.getLanguage().getName();
-                regionDescription = description.getDescription();
-                break;
-            }
-        }
-        // TODO eliminar syso cuando sea prescindible
-        System.out.println(regionName);
-        System.out.println(regionDescription);
-    }
-
 }

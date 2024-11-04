@@ -1,6 +1,7 @@
-package models;
+package models.pokemon;
 
 import com.google.gson.annotations.SerializedName;
+import models.sprites.Sprites;
 
 import java.util.List;
 import java.util.StringJoiner;
@@ -24,6 +25,14 @@ public class Pokemon {
     public Pokemon(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Integer getBaseStat(String strStat) {
+        return stats.stream()
+                .filter(stat -> strStat.equals(stat.getStat().getName()))
+                .map(Stats::getBaseStat)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override

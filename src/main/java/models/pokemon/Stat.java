@@ -1,4 +1,4 @@
-package models;
+package models.pokemon;
 
 public class Stat {
     private String name;
@@ -12,19 +12,19 @@ public class Stat {
                 '}';
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    private String getName() {
+    public String getName() {
         return this.name;
     }
 
-    private void setUrl(String url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    private String getUrl() {
+    public String getUrl() {
         return this.url;
     }
 }

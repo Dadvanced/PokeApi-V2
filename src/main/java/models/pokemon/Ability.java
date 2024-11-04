@@ -1,4 +1,4 @@
-package models;
+package models.pokemon;
 
 public class Ability {
     private boolean isHidden;
